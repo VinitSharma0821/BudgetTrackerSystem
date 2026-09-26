@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <title>Budget Tracker System</title>
+  </head>
+  <body>
+    <div class="main-box">
+      <h1>Budget Tracker System</h1>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-simple">
+            <h2>Add Budget</h2>
+            <div class="form-group">
+              <label for="budgetInput">Budget:</label>
+              <input
+                type="number"
+                class="input-field"
+                id="budgetInput"
+                placeholder="Enter your Budget"
+                min="0"
+              />
+            </div>
+            <button id="addBudgetBtn" class="btn-blue">Add Budget</button>
+          </div>
+
+          <div class="card-simple">
+            <h2>Add Expense</h2>
+            <div class="form-group">
+              <label for="expenseTitleInput">Expense Title:</label>
+              <input
+                type="text"
+                class="input-field"
+                id="expenseTitleInput"
+                placeholder="Enter your title"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expenseAmountInput">Amount:</label>
+              <input
+                type="number"
+                class="input-field"
+                id="expenseAmountInput"
+                placeholder="Enter your amount"
+                min="1"
+                step="any"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expenseDateInput">Date:</label>
+              <input type="date" class="input-field" id="expenseDateInput" />
+            </div>
+
+            <button id="addExpenseBtn" class="btn-blue">Add Expense</button>
+          </div>
+
+          <button id="resetAllBtn" class="btn-red">Reset All</button>
+        </div>
+
+        <div class="col-md-8">
+          <div class="row g-2 mb-3">
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-title">Total Budget</div>
+                <div class="stat-value" id="totalBudgetDisplay">0.00</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-title">Total Expenses</div>
+                <div class="stat-value" id="totalExpenseDisplay">0.00</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-title">Budget Left</div>
+                <div class="stat-value positive" id="budgetLeftDisplay">0.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-simple">
+            <h2>Expense History:</h2>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Expense Name</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="expenseTableBody"></tbody>
+              </table>
+            </div>
+            <div id="noExpensesMessage">No expense records found.</div>
+          </div>
+
+          <div class="card-simple">
+            <h2>Expense Distribution</h2>
+            <div class="chart-box">
+              <canvas id="expenseChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editExpenseModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Expense</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="editExpenseId" />
+            <div class="form-group">
+              <label for="editExpenseTitle">Expense Title:</label>
+              <input type="text" class="input-field" id="editExpenseTitle" />
+            </div>
+            <div class="form-group">
+              <label for="editExpenseAmount">Amount:</label>
+              <input type="number" class="input-field" id="editExpenseAmount" min="1" step="any" />
+            </div>
+            <div class="form-group">
+              <label for="editExpenseDate">Date:</label>
+              <input type="date" class="input-field" id="editExpenseDate" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn-blue w-auto px-3 py-1" id="saveEditExpenseBtn">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/expense.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
